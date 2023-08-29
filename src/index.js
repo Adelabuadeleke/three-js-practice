@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import * as THREE from 'three';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
 
 console.log('script');
 
@@ -18,10 +19,14 @@ const camera = new THREE.PerspectiveCamera(
  1000
 );
 
+const orbit  = new OrbitControls(camera, renderer.domElement);
+
 const axesHelper = new THREE.AxesHelper(5);
 scene.add(axesHelper);
 
 camera.position.set(0, 2, 5)
+orbit.update();
+
 
 // add box geometry
 const boxGeometry = new THREE.BoxGeometry();
@@ -31,9 +36,9 @@ scene.add(box)
 
 
 
-function animate(time){
- box.rotation.x += time/1000;
- box.rotation.y += time/1000;
+function animate(){
+ box.rotation.x += 5; //time/100
+ box.rotation.y += 5; //time/100
  renderer.render(scene, camera)
 }
 
