@@ -40,7 +40,11 @@ const planeGeometry = new THREE.PlaneGeometry(30,30);
 const planeMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF})
 const plane = new THREE.Mesh(planeGeometry, planeMaterial);
 scene.add(plane)
+plane.rotation.x = -0.5 * Math.PI
 
+// grid helper
+const gridHelper = new THREE.GridHelper(30);
+scene.add(gridHelper);
 
 function animate(time){
  box.rotation.x += time / 1000000; //time/100
