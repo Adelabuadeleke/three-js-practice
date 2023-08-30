@@ -70603,7 +70603,7 @@ const orbit  = new three_examples_jsm_controls_OrbitControls_js__WEBPACK_IMPORTE
 const axesHelper = new three__WEBPACK_IMPORTED_MODULE_1__.AxesHelper(5);
 scene.add(axesHelper);
 
-camera.position.set(0, 2, 5)
+camera.position.set(-10, 30, 30)
 orbit.update();
 
 
@@ -70614,10 +70614,16 @@ const box = new three__WEBPACK_IMPORTED_MODULE_1__.Mesh(boxGeometry, boxMaterial
 scene.add(box)
 
 
+// add plane geometry
+const planeGeometry = new three__WEBPACK_IMPORTED_MODULE_1__.PlaneGeometry(30,30);
+const planeMaterial = new three__WEBPACK_IMPORTED_MODULE_1__.MeshBasicMaterial({color: 0xFFFFFF})
+const plane = new three__WEBPACK_IMPORTED_MODULE_1__.Mesh(planeGeometry, planeMaterial);
+scene.add(plane)
 
-function animate(){
- box.rotation.x += 5; //time/100
- box.rotation.y += 5; //time/100
+
+function animate(time){
+ box.rotation.x += time / 1000000; //time/100
+ box.rotation.y += time / 1000000; //time/100
  renderer.render(scene, camera)
 }
 
