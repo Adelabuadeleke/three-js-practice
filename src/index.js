@@ -24,7 +24,7 @@ const orbit  = new OrbitControls(camera, renderer.domElement);
 const axesHelper = new THREE.AxesHelper(5);
 scene.add(axesHelper);
 
-camera.position.set(0, 2, 5)
+camera.position.set(-10, 30, 30)
 orbit.update();
 
 
@@ -35,10 +35,16 @@ const box = new THREE.Mesh(boxGeometry, boxMaterial);
 scene.add(box)
 
 
+// add plane geometry
+const planeGeometry = new THREE.PlaneGeometry(30,30);
+const planeMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF})
+const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+scene.add(plane)
 
-function animate(){
- box.rotation.x += 5; //time/100
- box.rotation.y += 5; //time/100
+
+function animate(time){
+ box.rotation.x += time / 1000000; //time/100
+ box.rotation.y += time / 1000000; //time/100
  renderer.render(scene, camera)
 }
 
