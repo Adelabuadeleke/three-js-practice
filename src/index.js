@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
+import * as dat from 'dat.gui'
 
 console.log('script');
 
@@ -37,7 +38,10 @@ scene.add(box)
 
 // add plane geometry
 const planeGeometry = new THREE.PlaneGeometry(30,30);
-const planeMaterial = new THREE.MeshBasicMaterial({color: 0xFFFFFF})
+const planeMaterial = new THREE.MeshBasicMaterial({
+ color: 0xFFFFFF,
+ side: THREE.DoubleSide
+})
 const plane = new THREE.Mesh(planeGeometry, planeMaterial);
 scene.add(plane)
 plane.rotation.x = -0.5 * Math.PI
@@ -46,9 +50,45 @@ plane.rotation.x = -0.5 * Math.PI
 const gridHelper = new THREE.GridHelper(30);
 scene.add(gridHelper);
 
+// add sphere geometry
+const sphereGeometry = new THREE.SphereGeometry(4, 50, 50);
+const sphereMaterial = new THREE.MeshBasicMaterial({
+ color:0x0000FF
+});
+const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial)
+scene.add(sphere)
+
+sphere.position.set(-10, 10, 10)
+
+const gui = new dat.GUI()
+
+const options = {
+ sphereColor: '#ffea00',
+ wireframe: false,
+ speed:0.01
+}
+
+gui.addColor(options, 'sphereColor').onChange(function(e){
+ sphere.material.color.set(e)
+})
+
+gui.add(options, 'wireframe').onChange(function(e){
+ sphere.material.wireframe = e;
+})
+
+gui.add(options, 'speed', 0, 0.1)
+
+
+let step = 0;
+// let speed = 0.01;
+
 function animate(time){
  box.rotation.x += time / 1000000; //time/100
  box.rotation.y += time / 1000000; //time/100
+
+ step += options.speed;
+ sphere.position.y = 10 * Math.abs(Math.abs(Math.sin(step)))
+
  renderer.render(scene, camera)
 }
 
