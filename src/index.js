@@ -7,6 +7,10 @@ console.log('script');
 
 const renderer = new THREE.WebGLRenderer();
 
+renderer.shadowMap.enabled = true;
+
+renderer.shadowMap.type = THREE.BasicShadowMap;
+
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 document.body.appendChild(renderer.domElement);
@@ -43,8 +47,11 @@ const planeMaterial = new THREE.MeshStandardMaterial({
  side: THREE.DoubleSide
 })
 const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+plane.receiveShadow = true;
 scene.add(plane)
 plane.rotation.x = -0.5 * Math.PI
+// plane receives shadow
+
 
 // grid helper
 const gridHelper = new THREE.GridHelper(30);
@@ -56,20 +63,42 @@ const sphereMaterial = new THREE.MeshStandardMaterial({
  color:0x0000FF
 });
 const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial)
+sphere.castShadow = true;
 scene.add(sphere)
 
 sphere.position.set(-10, 10, 10)
+// sphere cast shadow
+
+
 
 // add lighting
 const ambientLight = new THREE.AmbientLight(0x333333);
 scene.add(ambientLight);
 
-const directionalLight = new THREE.DirectionalLight(0xFFFFFF. o,8)
+// directional light
+const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 0.8)
+directionalLight.castShadow = true;
 scene.add(directionalLight)
 directionalLight.position.set(-30, 50, 0)
 
+// adjust shodow camera display
+directionalLight.shadow.camera.bottom = -12
+
 const dLightHelper = new THREE.DirectionalLightHelper(directionalLight, 5);
 scene.add(dLightHelper)
+
+
+const dLightShadowHelper = new THREE.CameraHelper(directionalLight.shadow.camera)
+scene.add(dLightShadowHelper);
+
+// spotlight lighting
+// const  spotLight = new THREE.SpotLight(0xFFFFFF);
+// scene.add(spotLight);
+// spotLight.position.set(-100, 100, 0);
+// spotLight.castShadow = true;
+
+// const sLightHelper = new THREE.SpotLightHelper(spotLight);
+// scene.add(sLightHelper)
 
 const gui = new dat.GUI()
 
