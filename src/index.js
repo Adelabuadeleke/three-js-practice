@@ -3,6 +3,9 @@ import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js';
 import * as dat from 'dat.gui'
 
+import star from '../src/img/nebula.jpg'
+import nebula from '../src/img/nebula.jpg'
+
 console.log('script');
 
 const renderer = new THREE.WebGLRenderer();
@@ -101,8 +104,17 @@ spotLight.angle = 0.2;
 const sLightHelper = new THREE.SpotLightHelper(spotLight);
 scene.add(sLightHelper)
 
+// fog
 // scene.fog = new THREE.Fog(0xFFFFFF, 0, 200)
 scene.fog = new THREE.FogExp2(0xFFFFFF, 0.01)
+
+// setting clear bg
+// renderer.setClearColor(0xFFEA00)
+const textureLoader = new THREE.TextureLoader();
+scene.background = textureLoader.load(star);
+
+// scene.background = textu
+
 
 const gui = new dat.GUI()
 
