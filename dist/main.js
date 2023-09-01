@@ -73196,29 +73196,30 @@ const ambientLight = new three__WEBPACK_IMPORTED_MODULE_2__.AmbientLight(0x33333
 scene.add(ambientLight);
 
 // directional light
-const directionalLight = new three__WEBPACK_IMPORTED_MODULE_2__.DirectionalLight(0xFFFFFF, 0.8)
-directionalLight.castShadow = true;
-scene.add(directionalLight)
-directionalLight.position.set(-30, 50, 0)
+// const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 0.8)
+// directionalLight.castShadow = true;
+// scene.add(directionalLight)
+// directionalLight.position.set(-30, 50, 0)
 
-// adjust shodow camera display
-directionalLight.shadow.camera.bottom = -12
+// // adjust shodow camera display
+// directionalLight.shadow.camera.bottom = -12
 
-const dLightHelper = new three__WEBPACK_IMPORTED_MODULE_2__.DirectionalLightHelper(directionalLight, 5);
-scene.add(dLightHelper)
+// const dLightHelper = new THREE.DirectionalLightHelper(directionalLight, 5);
+// scene.add(dLightHelper)
 
 
-const dLightShadowHelper = new three__WEBPACK_IMPORTED_MODULE_2__.CameraHelper(directionalLight.shadow.camera)
-scene.add(dLightShadowHelper);
+// const dLightShadowHelper = new THREE.CameraHelper(directionalLight.shadow.camera)
+// scene.add(dLightShadowHelper);
 
 // spotlight lighting
-// const  spotLight = new THREE.SpotLight(0xFFFFFF);
-// scene.add(spotLight);
-// spotLight.position.set(-100, 100, 0);
-// spotLight.castShadow = true;
+const  spotLight = new three__WEBPACK_IMPORTED_MODULE_2__.SpotLight(0xFFFFFF);
+scene.add(spotLight);
+spotLight.position.set(-100, 100, 0);
+spotLight.castShadow = true;
+spotLight.angle = 0.2;
 
-// const sLightHelper = new THREE.SpotLightHelper(spotLight);
-// scene.add(sLightHelper)
+const sLightHelper = new three__WEBPACK_IMPORTED_MODULE_2__.SpotLightHelper(spotLight);
+scene.add(sLightHelper)
 
 const gui = new dat_gui__WEBPACK_IMPORTED_MODULE_1__.GUI()
 
