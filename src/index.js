@@ -137,7 +137,7 @@ const boxMultiMaterial = [
  new THREE.MeshBasicMaterial({map: textureLoader.load(star)}),
  new THREE.MeshBasicMaterial({map: textureLoader.load(nebula)}),
  new THREE.MeshBasicMaterial({map: textureLoader.load(star)})
- 
+
 ]
 
 const box2 = new THREE.Mesh(box2Geometry, boxMultiMaterial);
@@ -175,6 +175,17 @@ gui.add(options, 'intensity', 0, 1)
 let step = 0;
 // let speed = 0.01;
 
+const mousePosition = new THREE.Vector2();
+
+window.addEventListener('mousemove', function(e){
+ mousePosition.x = (e.clientX / this.window.innerWidth) * 2 - 1; 
+ mousePosition.y = (e.clientY / this.window.innerHeight) * 2 + 1; 
+})
+
+const raycaster = new THREE.Raycaster();
+
+const sphereId = sphere.id;
+
 function animate(time){
  box.rotation.x += time / 1000000; //time/100
  box.rotation.y += time / 1000000; //time/100
@@ -187,6 +198,16 @@ function animate(time){
  spotLight.intensity = options.intensity;
  sLightHelper.update()
 
+ raycaster.setFromCamera(mousePosition, camera);
+ const intersects = raycaster.intersectObjects(scene.children);
+console.log(intersects)
+ for(let i = 0; i < intersects.length; i++){
+  if(intersects[i].object.id === sphereId)
+   intersects[i].object.material.color.set(0xFF0000)
+ 
+   
+  
+ }
 
  renderer.render(scene, camera)
 }
