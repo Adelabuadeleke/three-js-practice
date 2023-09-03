@@ -155,7 +155,11 @@ const plane2 = new THREE.Mesh(plane2Geometry, plane2Material);
 scene.add(plane2);
 plane2.position.set(10, 10, 15);
 
-
+plane2.geometry.attributes.position.array[0] -= 10 * Math.random()
+plane2.geometry.attributes.position.array[1] -= 10 * Math.random()
+plane2.geometry.attributes.position.array[2] -= 10 * Math.random()
+const lastPointZ = plane2.geometry.attributes.position.array.length - 1;
+plane2.geometry.attributes.position.array[lastPointZ] -= 10 * Math.random()
 
 
 const gui = new dat.GUI()
