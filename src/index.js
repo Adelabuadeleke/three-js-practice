@@ -155,7 +155,34 @@ const plane2 = new THREE.Mesh(plane2Geometry, plane2Material);
 scene.add(plane2);
 plane2.position.set(10, 10, 15);
 
+plane2.geometry.attributes.position.array[0] -= 10 * Math.random()
+plane2.geometry.attributes.position.array[1] -= 10 * Math.random()
+plane2.geometry.attributes.position.array[2] -= 10 * Math.random()
+const lastPointZ = plane2.geometry.attributes.position.array.length - 1;
+plane2.geometry.attributes.position.array[lastPointZ] -= 10 * Math.random()
+// plane2.geometry.attributes.position.needsUpdate = true;
 
+
+const sphere2Geometry = new THREE.SphereGeometry(4);
+const vShader = `
+  void main() {
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`;
+
+const fShader = `
+void main() {
+  gl_FragColor = vec4(0.5, 0.5, 1.0, 1.0);
+}
+`;
+
+const Sphere2Material = new THREE.ShaderMaterial({
+  vertexShader: vShader,
+  fragmentShader: fShader
+})
+const sphere2 = new THREE.Mesh(sphere2Geometry, Sphere2Material)
+scene.add(sphere2)
+sphere2.position.set(-5, 10, 10);
 
 
 const gui = new dat.GUI()
@@ -202,7 +229,6 @@ box2.name = 'theBox';
   
 
 function animate(time){
-  const lastPointZ = plane2.geometry.attributes.position.array.length - 1;
 
  box.rotation.x += time / 1000000; //time/100
  box.rotation.y += time / 1000000; //time/100
