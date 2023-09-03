@@ -155,11 +155,7 @@ const plane2 = new THREE.Mesh(plane2Geometry, plane2Material);
 scene.add(plane2);
 plane2.position.set(10, 10, 15);
 
-plane2.geometry.attributes.position.array[0] -= 10 * Math.random()
-plane2.geometry.attributes.position.array[1] -= 10 * Math.random()
-plane2.geometry.attributes.position.array[2] -= 10 * Math.random()
-const lastPointZ = plane2.geometry.attributes.position.array.length - 1;
-plane2.geometry.attributes.position.array[lastPointZ] -= 10 * Math.random()
+
 
 
 const gui = new dat.GUI()
@@ -203,8 +199,11 @@ const raycaster = new THREE.Raycaster();
 const sphereId = sphere.id;
 box2.name = 'theBox';
 
+  
 
 function animate(time){
+  const lastPointZ = plane2.geometry.attributes.position.array.length - 1;
+
  box.rotation.x += time / 1000000; //time/100
  box.rotation.y += time / 1000000; //time/100
 
@@ -228,6 +227,13 @@ function animate(time){
     intersects[i].object.y += time / 1000; //time/100
   }
  }
+
+  //  changing waves animation
+  plane2.geometry.attributes.position.array[0] = 10 * Math.random()
+  plane2.geometry.attributes.position.array[1] = 10 * Math.random()
+  plane2.geometry.attributes.position.array[2] = 10 * Math.random()
+  plane2.geometry.attributes.position.array[lastPointZ] = 10 * Math.random()
+  plane2.geometry.attributes.position.needsUpdate = true;
 
  renderer.render(scene, camera)
 }
