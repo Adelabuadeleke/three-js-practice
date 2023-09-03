@@ -164,21 +164,23 @@ plane2.geometry.attributes.position.array[lastPointZ] -= 10 * Math.random()
 
 
 const sphere2Geometry = new THREE.SphereGeometry(4);
-const vShader = `
-  void main() {
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-  }
-`;
+// const vShader = `
+//   void main() {
+//     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+//   }
+// `;
 
-const fShader = `
-void main() {
-  gl_FragColor = vec4(0.5, 0.5, 1.0, 1.0);
-}
-`;
+// const fShader = `
+// void main() {
+//   gl_FragColor = vec4(0.5, 0.5, 1.0, 1.0);
+// }
+// `;
 
 const Sphere2Material = new THREE.ShaderMaterial({
-  vertexShader: vShader,
-  fragmentShader: fShader
+  // vertexShader: vShader,
+  // fragmentShader: fShader
+  vertexShader: document.getElementById('vertexShader').textContent,
+  fragmentShader: document.getElementById('fragmentShader').textContent
 })
 const sphere2 = new THREE.Mesh(sphere2Geometry, Sphere2Material)
 scene.add(sphere2)
