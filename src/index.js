@@ -178,13 +178,15 @@ let step = 0;
 const mousePosition = new THREE.Vector2();
 
 window.addEventListener('mousemove', function(e){
- mousePosition.x = (e.clientX / this.window.innerWidth) * 2 - 1; 
- mousePosition.y = (e.clientY / this.window.innerHeight) * 2 + 1; 
+ mousePosition.x = (e.clientX / window.innerWidth) * 2 - 1; 
+ mousePosition.y = (e.clientY / window.innerHeight) * 2 + 1; 
 })
 
 const raycaster = new THREE.Raycaster();
 
 const sphereId = sphere.id;
+box2.name = 'theBox';
+
 
 function animate(time){
  box.rotation.x += time / 1000000; //time/100
@@ -200,13 +202,15 @@ function animate(time){
 
  raycaster.setFromCamera(mousePosition, camera);
  const intersects = raycaster.intersectObjects(scene.children);
-console.log(intersects)
+  // console.log(intersects)
  for(let i = 0; i < intersects.length; i++){
   if(intersects[i].object.id === sphereId)
    intersects[i].object.material.color.set(0xFF0000)
- 
-   
-  
+
+  if(intersects[i].object.name === 'theBox'){
+    intersects[i].object.x += time / 1000; //time/100
+    intersects[i].object.y += time / 1000; //time/100
+  }
  }
 
  renderer.render(scene, camera)
