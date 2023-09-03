@@ -145,7 +145,7 @@ scene.add(box2)
 box2.position.set(0, 15, 10)
 box2.material.map = textureLoader.load(nebula)
 
-const plane2Geometry = new THREE.PlaneGeometry(10, 10);
+const plane2Geometry = new THREE.PlaneGeometry(10, 10, 10, 10);
 const plane2Material = new THREE.MeshBasicMaterial({
   color:0xFFFFFF,
   wireframe: true
