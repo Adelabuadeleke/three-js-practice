@@ -145,6 +145,18 @@ scene.add(box2)
 box2.position.set(0, 15, 10)
 box2.material.map = textureLoader.load(nebula)
 
+const plane2Geometry = new THREE.PlaneGeometry(10, 10);
+const plane2Material = new THREE.MeshBasicMaterial({
+  color:0xFFFFFF,
+  wireframe: true
+});
+
+const plane2 = new THREE.Mesh(plane2Geometry, plane2Material);
+scene.add(plane2);
+plane2.position.set(10, 10, 15);
+
+
+
 
 const gui = new dat.GUI()
 
